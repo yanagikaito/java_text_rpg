@@ -23,11 +23,7 @@ public class ChoiceHandler implements ActionListener {
             case "c1":
                 gameWindow.talkGuard();
                 break;
-            case "c2":
-                break;
-            case "c3":
-                break;
-            case "c4":
+            case "c2", "c3", "c4":
                 break;
         }
     }

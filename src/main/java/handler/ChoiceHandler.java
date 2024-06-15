@@ -24,6 +24,8 @@ public class ChoiceHandler implements ActionListener {
                 switch (yourChoice) {
                     case "c1" -> gameWindow.talkGuard();
                     case "c2" -> gameWindow.attackGuard();
+                    case "c3" -> gameWindow.crossRoad();
+                    case "c4" -> {
                     case "c3", "c4" -> {
                     }
                 }
@@ -33,7 +35,15 @@ public class ChoiceHandler implements ActionListener {
                     case "c1" -> gameWindow.townGate();
                 }
                 break;
+            case "分かれ道":
+                switch (yourChoice) {
+                    case "c1", "c2", "c4":
+                        break;
+                    case "c3":
+                        gameWindow.townGate();
+                }
         }
     }
 }
+
 

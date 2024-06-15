@@ -17,4 +17,6 @@ public interface Window {
     void talkGuard();
 
     void attackGuard();
+
+    void crossRoad();
 }

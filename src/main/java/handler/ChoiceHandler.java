@@ -23,14 +23,16 @@ public class ChoiceHandler implements ActionListener {
             case "町の門":
                 switch (yourChoice) {
                     case "c1" -> gameWindow.talkGuard();
-                    case "c2", "c3", "c4" -> {
+                    case "c2" -> gameWindow.attackGuard();
+                    case "c3", "c4" -> {
                     }
                 }
                 break;
-            case "門番に話す":
+            case "門番に話す", "門番に攻撃":
                 switch (yourChoice) {
                     case "c1" -> gameWindow.townGate();
                 }
+                break;
         }
     }
 }

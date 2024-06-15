@@ -15,4 +15,6 @@ public interface Window {
     void townGate();
 
     void talkGuard();
+
+    void attackGuard();
 }

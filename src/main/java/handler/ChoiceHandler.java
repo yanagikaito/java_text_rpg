@@ -19,12 +19,19 @@ public class ChoiceHandler implements ActionListener {
         // 選択されたボタンのコマンドの文字列がこの変数に入る
         String yourChoice = e.getActionCommand();
 
-        switch (yourChoice) {
-            case "c1":
-                gameWindow.talkGuard();
+        switch (gameWindow.getPosition()) {
+            case "町の門":
+                switch (yourChoice) {
+                    case "c1" -> gameWindow.talkGuard();
+                    case "c2", "c3", "c4" -> {
+                    }
+                }
                 break;
-            case "c2", "c3", "c4":
-                break;
+            case "門番に話す":
+                switch (yourChoice) {
+                    case "c1" -> gameWindow.townGate();
+                }
         }
     }
 }
+

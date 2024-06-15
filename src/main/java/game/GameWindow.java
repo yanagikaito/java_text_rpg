@@ -29,7 +29,7 @@ public class GameWindow implements Window {
     JTextArea mainTextArea;
     int playerHp;
     String weapon;
-    String position;
+    private String position;
     TitleScreenHandler tsHandler = new TitleScreenHandler(this);
     ChoiceHandler cHandler = new ChoiceHandler(this);
 
@@ -233,5 +233,9 @@ public class GameWindow implements Window {
         choice2.setText("門番を攻撃する");
         choice3.setText("立ち去る");
         choice4.setText("");
+    }
+
+    public String getPosition() {
+        return position;
     }
 }

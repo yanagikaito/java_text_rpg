@@ -26,6 +26,7 @@ public class ChoiceHandler implements ActionListener {
                     case "c2" -> gameWindow.attackGuard();
                     case "c3" -> gameWindow.crossRoad();
                     case "c4" -> {
+                    case "c3", "c4" -> {
                     }
                 }
                 break;

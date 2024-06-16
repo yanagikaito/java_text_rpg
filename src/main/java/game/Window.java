@@ -19,4 +19,6 @@ public interface Window {
     void attackGuard();
 
     void crossRoad();
+
+    void north();
 }

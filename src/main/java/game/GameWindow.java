@@ -28,6 +28,7 @@ public class GameWindow implements Window {
     JButton choice4;
     JTextArea mainTextArea;
     int playerHp;
+    int monsterHp;
     String weapon;
     private String position;
     TitleScreenHandler tsHandler = new TitleScreenHandler(this);
@@ -214,6 +215,12 @@ public class GameWindow implements Window {
     }
 
     @Override
+    public int monsterSetUp() {
+        monsterHp = 20;
+        return monsterHp;
+    }
+
+    @Override
     public void townGate() {
         position = "町の門";
         mainTextArea.setText("あなたは町の門の前にいる。\nあなたの前に門番が立っている。\n\nどうしますか？");
@@ -296,13 +303,24 @@ public class GameWindow implements Window {
     @Override
     public void west() {
         position = "西";
+        monsterSetUp();
         mainTextArea.setText("ゴブリンに遭遇した");
         choice1.setText("攻撃する");
         choice2.setText("逃げる");
         choice3.setText("");
         choice4.setText("");
-
     }
+
+    @Override
+    public void fight() {
+        position = "たたかう";
+        mainTextArea.setText("モンスター HP : " + monsterSetUp() + "\n\n 何をする？");
+        choice1.setText("攻撃");
+        choice2.setText("逃げる");
+        choice3.setText("");
+        choice4.setText("");
+    }
+
 
     public String getPosition() {
         return position;

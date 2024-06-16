@@ -12,6 +12,8 @@ public interface Window {
 
     void playerSetUp();
 
+    int monsterSetUp();
+
     void townGate();
 
     void talkGuard();
@@ -25,4 +27,6 @@ public interface Window {
     void east();
 
     void west();
+
+    void fight();
 }

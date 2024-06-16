@@ -23,4 +23,6 @@ public interface Window {
     void north();
 
     void east();
+
+    void west();
 }

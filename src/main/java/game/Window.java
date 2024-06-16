@@ -21,4 +21,6 @@ public interface Window {
     void crossRoad();
 
     void north();
+
+    void east();
 }

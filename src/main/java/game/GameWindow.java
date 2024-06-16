@@ -293,7 +293,7 @@ public class GameWindow implements Window {
         position = "西";
         monsterSetUp();
         mainTextArea.setText("ゴブリンに遭遇した");
-        choice1.setText("攻撃する");
+        choice1.setText("たたかう");
         choice2.setText("逃げる");
         choice3.setText("");
         choice4.setText("");

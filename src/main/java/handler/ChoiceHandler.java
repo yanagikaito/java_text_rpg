@@ -40,13 +40,17 @@ public class ChoiceHandler implements ActionListener {
                     case "c1" -> gameWindow.north();
                     case "c2" -> gameWindow.east();
                     case "c3" -> gameWindow.townGate();
-                    case "c4" -> {
-                    }
+                    case "c4" -> gameWindow.west();
                 }
             }
-            case "北" -> {
+            case "北", "東" -> {
                 switch (yourChoice) {
                     case "c1" -> gameWindow.crossRoad();
+                }
+            }
+            case "西" -> {
+                switch (yourChoice) {
+                    case "c2" -> gameWindow.crossRoad();
                 }
             }
         }

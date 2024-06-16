@@ -263,7 +263,7 @@ public class GameWindow implements Window {
         mainTextArea.setText("川がある。\n水を飲み、川辺で休んだ。\n\nプレイヤーのHPが2回復した。");
         playerHp = playerHp + 2;
         hpLabelNumber.setText("" + playerHp);
-        choice1.setText("北へ進む");
+        choice1.setText("南へ進む");
         choice2.setText("");
         choice3.setText("");
         choice4.setText("");
@@ -275,6 +275,21 @@ public class GameWindow implements Window {
         mainTextArea.setText("森に入り、ロングソードを見つける。\n\nロングソードを手に入れた");
         weapon = "ロングソード";
         weaponLabelName.setText(weapon);
+        choice1.setText("西へ進む");
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+
+    @Override
+    public void west() {
+        position = "西";
+        mainTextArea.setText("ゴブリンに遭遇した");
+        choice1.setText("攻撃する");
+        choice2.setText("逃げる");
+        choice3.setText("");
+        choice4.setText("");
+
     }
 
     public String getPosition() {

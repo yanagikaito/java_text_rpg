@@ -36,10 +36,14 @@ public class ChoiceHandler implements ActionListener {
                 break;
             case "分かれ道":
                 switch (yourChoice) {
-                    case "c1", "c2", "c4":
+                    case "c1":
+                        gameWindow.north();
+                        break;
+                    case "c2", "c4":
                         break;
                     case "c3":
                         gameWindow.townGate();
+                        break;
                 }
         }
     }

@@ -257,6 +257,14 @@ public class GameWindow implements Window {
         choice4.setText("西へ進む");
     }
 
+    @Override
+    public void north() {
+        position = "北";
+        mainTextArea.setText("川がある。\n水を飲み、川辺で休んだ。\nプレイヤーのHPが2回復した。");
+        playerHp = playerHp + 2;
+        hpLabelNumber.setText("" + playerHp);
+    }
+
     public String getPosition() {
         return position;
     }

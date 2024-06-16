@@ -12,6 +12,8 @@ public interface Window {
 
     void playerSetUp();
 
+    void playerAttack();
+
     int monsterSetUp();
 
     void townGate();

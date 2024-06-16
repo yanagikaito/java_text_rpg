@@ -5,6 +5,7 @@ import handler.TitleScreenHandler;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Random;
 
 public class GameWindow implements Window {
     JFrame window;
@@ -305,6 +306,24 @@ public class GameWindow implements Window {
         mainTextArea.setText("モンスター HP : " + monsterSetUp() + "\n\n 何をする？");
         choice1.setText("攻撃");
         choice2.setText("逃げる");
+        choice3.setText("");
+        choice4.setText("");
+    }
+
+    @Override
+    public void playerAttack() {
+        Random random = new Random();
+        position = "プレイヤーの攻撃";
+        int playerDamage = 0;
+        if (weapon.equals("ナイフ")) {
+            playerDamage = random.nextInt(3) + 1;
+        } else if (weapon.equals("ロングソード")) {
+            playerDamage = random.nextInt(5) + 1;
+        }
+        mainTextArea.setText("モンスターを攻撃し、" + playerDamage + "ダメージを与えた。");
+        monsterHp = monsterSetUp() - playerDamage;
+        choice1.setText(">");
+        choice2.setText("");
         choice3.setText("");
         choice4.setText("");
     }

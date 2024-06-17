@@ -61,6 +61,16 @@ public class ChoiceHandler implements ActionListener {
                     case "c2" -> gameWindow.crossRoad();
                 }
             }
+            case "プレイヤーの攻撃" -> {
+                switch (yourChoice) {
+                    case "c1" -> gameWindow.monsterAttack();
+                }
+            }
+            case "モンスターの攻撃" -> {
+                switch (yourChoice) {
+                    case "c1" -> gameWindow.fight();
+                }
+            }
         }
     }
 }

@@ -216,12 +216,6 @@ public class GameWindow implements Window {
     }
 
     @Override
-    public int monsterSetUp() {
-        monsterHp = 20;
-        return monsterHp;
-    }
-
-    @Override
     public void townGate() {
         position = "町の門";
         mainTextArea.setText("あなたは町の門の前にいる。\nあなたの前に門番が立っている。\n\nどうしますか？");
@@ -292,7 +286,7 @@ public class GameWindow implements Window {
     @Override
     public void west() {
         position = "西";
-        monsterSetUp();
+        monsterHp = 20;
         mainTextArea.setText("ゴブリンに遭遇した");
         choice1.setText("たたかう");
         choice2.setText("逃げる");
@@ -303,7 +297,7 @@ public class GameWindow implements Window {
     @Override
     public void fight() {
         position = "たたかう";
-        mainTextArea.setText("モンスター HP : " + monsterSetUp() + "\n\n 何をする？");
+        mainTextArea.setText("モンスター HP : " + monsterHp + "\n\n 何をする？");
         choice1.setText("攻撃");
         choice2.setText("逃げる");
         choice3.setText("");
@@ -321,7 +315,22 @@ public class GameWindow implements Window {
             playerDamage = random.nextInt(5) + 1;
         }
         mainTextArea.setText("モンスターを攻撃し、" + playerDamage + "ダメージを与えた。");
-        monsterHp = monsterSetUp() - playerDamage;
+        monsterHp = monsterHp - playerDamage;
+        choice1.setText(">");
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
+
+    @Override
+    public void monsterAttack() {
+        Random random = new Random();
+        position = "モンスターの攻撃";
+        int monsterDamage = 0;
+        monsterDamage = random.nextInt(4) + 1;
+        mainTextArea.setText("モンスターはプレイヤーに" + monsterDamage + "ダメージ与えた");
+        playerHp = playerHp - monsterDamage;
+        hpLabelNumber.setText("" + playerHp);
         choice1.setText(">");
         choice2.setText("");
         choice3.setText("");

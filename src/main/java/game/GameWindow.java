@@ -8,32 +8,32 @@ import java.awt.*;
 import java.util.Random;
 
 public class GameWindow implements Window {
-    JFrame window;
-    Container con;
-    JPanel titleNamePanel;
-    JPanel startButtonPanel;
-    JPanel mainTextPanel;
-    JPanel choiceButtonPanel;
-    JPanel playerPanel;
-    JLabel titleNameLabel;
-    JLabel hpLabel;
-    JLabel hpLabelNumber;
-    JLabel weaponLabel;
-    JLabel weaponLabelName;
-    Font titleFont = new Font("アリアル", Font.PLAIN, 70);
-    Font normalFont = new Font("アリアル", Font.PLAIN, 25);
-    JButton startButton;
-    JButton choice1;
-    JButton choice2;
-    JButton choice3;
-    JButton choice4;
-    JTextArea mainTextArea;
-    int playerHp;
-    int monsterHp;
-    String weapon;
+    private JFrame window;
+    private Container con;
+    private JPanel titleNamePanel;
+    private JPanel startButtonPanel;
+    private JPanel mainTextPanel;
+    private JPanel choiceButtonPanel;
+    private JPanel playerPanel;
+    private JLabel titleNameLabel;
+    private JLabel hpLabel;
+    private JLabel hpLabelNumber;
+    private JLabel weaponLabel;
+    private JLabel weaponLabelName;
+    private Font titleFont = new Font("アリアル", Font.PLAIN, 70);
+    private Font normalFont = new Font("アリアル", Font.PLAIN, 25);
+    private JButton startButton;
+    private JButton choice1;
+    private JButton choice2;
+    private JButton choice3;
+    private JButton choice4;
+    private JTextArea mainTextArea;
+    private int playerHp;
+    private int monsterHp;
+    private String weapon;
     private String position;
-    TitleScreenHandler tsHandler = new TitleScreenHandler(this);
-    ChoiceHandler cHandler = new ChoiceHandler(this);
+    private TitleScreenHandler tsHandler = new TitleScreenHandler(this);
+    private ChoiceHandler cHandler = new ChoiceHandler(this);
 
     @Override
     public void frame() {
@@ -330,6 +330,9 @@ public class GameWindow implements Window {
         monsterDamage = random.nextInt(4) + 1;
         mainTextArea.setText("モンスターはプレイヤーに" + monsterDamage + "ダメージ与えた");
         playerHp = playerHp - monsterDamage;
+        if (playerHp <= 0) {
+            playerHp = 0;
+        }
         hpLabelNumber.setText("" + playerHp);
         choice1.setText(">");
         choice2.setText("");

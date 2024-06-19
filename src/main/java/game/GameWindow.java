@@ -264,19 +264,7 @@ public class GameWindow implements Window {
         choice4.setText("");
     }
 
-    @Override
-    public void attackGuard() {
-        position = "門番に攻撃";
-        mainTextArea.setText("門番：おい、バカなことを言うな。\n門番は反撃し、プレイヤーを攻撃した。\n(あなたは3ダメージを受けた。)");
-        playerHp = playerHp - 3;
-        hpLabelNumber.setText("" + playerHp);
-        choice1.setText(">");
-        choice2.setText("");
-        choice3.setText("");
-        choice4.setText("");
-    }
-
-    @Override
+  　@Override
     public void crossRoad() {
         position = "分かれ道";
         mainTextArea.setText("ここからは分かれ道になっている。\n 南に行けば、町に戻れる。");

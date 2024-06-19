@@ -44,7 +44,7 @@ public class ChoiceHandler implements ActionListener {
                     case "c4" -> gameWindow.west();
                 }
             }
-            case "北", "東" -> {
+            case "北", "東", "勝ち", "負け" -> {
                 switch (yourChoice) {
                     case "c1" -> gameWindow.crossRoad();
                 }
@@ -76,17 +76,10 @@ public class ChoiceHandler implements ActionListener {
                 switch (yourChoice) {
                     case "c1" -> {
                         if (gameWindow.getPlayerHp() < 1) {
-
+                            gameWindow.lose();
                         } else {
                             gameWindow.fight();
                         }
-                    }
-                }
-            }
-            case "勝ち" -> {
-                switch (yourChoice) {
-                    case "c1" -> {
-                        gameWindow.crossRoad();
                     }
                 }
             }

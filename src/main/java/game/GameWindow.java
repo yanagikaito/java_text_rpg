@@ -342,7 +342,7 @@ public class GameWindow implements Window {
         if (weapon.equals("ナイフ")) {
             playerDamage = random.nextInt(3) + 1;
         } else if (weapon.equals("ロングソード")) {
-            playerDamage = random.nextInt(10) + 1;
+            playerDamage = random.nextInt(5) + 1;
         }
         mainTextArea.setText("モンスターを攻撃し、" + playerDamage + "ダメージを与えた。");
         monsterHp = monsterHp - playerDamage;
@@ -378,7 +378,16 @@ public class GameWindow implements Window {
         choice2.setText("");
         choice3.setText("");
         choice4.setText("");
+    }
 
+    @Override
+    public void lose() {
+        position = "負け";
+        mainTextArea.setText("プレイヤーはモンスターに負けました。\n\nGAME OVER");
+        choice1.setText(">");
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
     }
 
 

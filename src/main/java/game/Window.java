@@ -33,4 +33,6 @@ public interface Window {
     void fight();
 
     void win();
+
+    void lose();
 }

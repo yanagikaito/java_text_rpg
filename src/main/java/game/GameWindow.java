@@ -291,6 +291,9 @@ public class GameWindow implements Window {
         position = "北";
         mainTextArea.setText("川がある。\n水を飲み、川辺で休んだ。\n\nプレイヤーのHPが2回復した。");
         playerHp = playerHp + 2;
+        if (playerHp >= 20) {
+            playerHp = 20;
+        }
         hpLabelNumber.setText("" + playerHp);
         choice1.setText("南へ進む");
         choice2.setText("");
@@ -339,7 +342,7 @@ public class GameWindow implements Window {
         if (weapon.equals("ナイフ")) {
             playerDamage = random.nextInt(3) + 1;
         } else if (weapon.equals("ロングソード")) {
-            playerDamage = random.nextInt(5) + 1;
+            playerDamage = random.nextInt(10) + 1;
         }
         mainTextArea.setText("モンスターを攻撃し、" + playerDamage + "ダメージを与えた。");
         monsterHp = monsterHp - playerDamage;
@@ -367,8 +370,27 @@ public class GameWindow implements Window {
         choice4.setText("");
     }
 
+    @Override
+    public void win() {
+        position = "勝ち";
+        mainTextArea.setText("プレイヤーはモンスターを倒しました");
+        choice1.setText("東");
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+
+    }
+
 
     public String getPosition() {
         return position;
+    }
+
+    public int getPlayerHp() {
+        return playerHp;
+    }
+
+    public int getMonsterHp() {
+        return monsterHp;
     }
 }

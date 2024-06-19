@@ -370,6 +370,8 @@ public class GameWindow implements Window {
 
     @Override
     public void lose() {
+        playerHp = 1;
+        hpLabelNumber.setText("" + playerHp);
         position = "負け";
         mainTextArea.setText("プレイヤーはモンスターに負けました。\n\nGAME OVER");
         choice1.setText(">");

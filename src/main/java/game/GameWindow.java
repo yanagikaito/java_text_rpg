@@ -17,6 +17,8 @@ public class GameWindow implements Window {
     private JPanel playerPanel;
     private JLabel titleNameLabel;
     private JLabel hpLabel;
+    private JLabel lvLabel;
+    private JLabel lvLabelNumber;
     private JLabel hpLabelNumber;
     private JLabel weaponLabel;
     private JLabel weaponLabelName;
@@ -29,6 +31,7 @@ public class GameWindow implements Window {
     private JButton choice4;
     private JTextArea mainTextArea;
     private int playerHp;
+    private int playerLv;
     private int monsterHp;
     private String weapon;
     private String position;
@@ -191,6 +194,16 @@ public class GameWindow implements Window {
         hpLabelNumber.setForeground(Color.white);
         playerPanel.add(hpLabelNumber);
 
+        lvLabel = new JLabel("LV：");
+        lvLabel.setFont(normalFont);
+        lvLabel.setForeground(Color.white);
+        playerPanel.add(lvLabel);
+
+        lvLabelNumber = new JLabel();
+        lvLabelNumber.setFont(normalFont);
+        lvLabelNumber.setForeground(Color.white);
+        playerPanel.add(lvLabelNumber);
+
         weaponLabel = new JLabel("武器:");
         weaponLabel.setFont(normalFont);
         weaponLabel.setForeground(Color.white);
@@ -208,8 +221,10 @@ public class GameWindow implements Window {
     @Override
     public void playerSetUp() {
         playerHp = 15;
+        playerLv = 1;
         weapon = "ナイフ";
         hpLabelNumber.setText("" + playerHp);
+        lvLabelNumber.setText("" + playerLv);
         weaponLabelName.setText(weapon);
 
         townGate();

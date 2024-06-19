@@ -31,4 +31,6 @@ public interface Window {
     void west();
 
     void fight();
+
+    void win();
 }

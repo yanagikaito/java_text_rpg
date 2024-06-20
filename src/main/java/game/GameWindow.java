@@ -8,6 +8,7 @@ import java.awt.*;
 import java.util.Random;
 
 public class GameWindow implements Window {
+    private GameElementFactory factory = new ConcreteGameElementFactory();
     private JFrame window;
     private Container con;
     private JPanel titleNamePanel;
@@ -32,7 +33,9 @@ public class GameWindow implements Window {
     private JTextArea mainTextArea;
     private int playerHp;
     private int playerLv;
+    private int playerExp;
     private int monsterHp;
+    private int monsterExp;
     private String weapon;
     private String position;
     private TitleScreenHandler tsHandler = new TitleScreenHandler(this);
@@ -42,44 +45,30 @@ public class GameWindow implements Window {
     public void frame() {
 
         // ウィンドウ作成
-        window = new JFrame();
-        window.setSize(800, 600);
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.getContentPane().setBackground(Color.black);
-
-        // JFrameのデフォルトのレイアウトを無効
-        window.setLayout(null);
-        window.setLocationRelativeTo(null);
-        window.setVisible(true);
+        window = factory.createFrame();
         con = window.getContentPane();
 
         // タイトルパネル作成
-        titleNamePanel = new JPanel();
+        titleNamePanel = factory.createPanel();
         titleNamePanel.setBounds(100, 100, 600, 150);
-        titleNamePanel.setBackground(Color.black);
 
         // タイトルラベル作成
         titleNameLabel = new JLabel("テキストRPG");
+        titleNameLabel.setBackground(Color.black);
         titleNameLabel.setForeground(Color.white);
         titleNameLabel.setFont(titleFont);
 
         // スタートボタンパネル作成
-        startButtonPanel = new JPanel();
+        startButtonPanel = factory.createPanel();
         startButtonPanel.setBounds(300, 400, 200, 100);
-        startButtonPanel.setBackground(Color.black);
 
         // スタートボタン作成
         startButton = new JButton("スタート");
-
-        // ボタン自体の色
         startButton.setBackground(Color.black);
-
-        // ボタンテキストの色
         startButton.setForeground(Color.white);
         startButton.setFont(normalFont);
-        startButton.addActionListener(tsHandler);
-        // スタートボタンの枠が消える
         startButton.setFocusPainted(false);
+        startButton.addActionListener(tsHandler);
 
         titleNamePanel.add(titleNameLabel);
 
@@ -100,69 +89,52 @@ public class GameWindow implements Window {
         titleNamePanel.setVisible(false);
         startButtonPanel.setVisible(false);
 
-        mainTextPanel = new JPanel();
+        mainTextPanel = factory.createPanel();
         mainTextPanel.setBounds(100, 100, 600, 250);
-        mainTextPanel.setBackground(Color.black);
         con.add(mainTextPanel);
 
-        mainTextArea = new JTextArea("これはメインのテキストエリア。");
+        mainTextArea = factory.createTextArea("これはメインのテキストエリア。");
         mainTextArea.setBounds(100, 100, 600, 250);
-        mainTextArea.setBackground(Color.black);
-        mainTextArea.setForeground(Color.white);
         mainTextArea.setFont(normalFont);
 
         // テキストエリアの範囲外に飛び出ないように
         // 自動ロックされており,自動的にテキストが左に表示される
-        mainTextArea.setLineWrap(true);
         mainTextPanel.add(mainTextArea);
 
-        choiceButtonPanel = new JPanel();
+        choiceButtonPanel = factory.createPanel();
         choiceButtonPanel.setBounds(250, 350, 300, 150);
-        choiceButtonPanel.setBackground(Color.black);
 
         // row 行　col 列
         // カスタマイズされたレイアウトを設定
         choiceButtonPanel.setLayout(new GridLayout(4, 1));
         con.add(choiceButtonPanel);
 
-        choice1 = new JButton("選択 1");
-        choice1.setBackground(Color.black);
-        choice1.setForeground(Color.white);
+        choice1 = factory.createButton("選択 1");
         choice1.setFont(normalFont);
-        choice1.setFocusPainted(false);
         choice1.addActionListener(cHandler);
         choice1.setActionCommand("c1");
 
         // choice1をchoiceButtonPanelの上に配置
         choiceButtonPanel.add(choice1);
 
-        choice2 = new JButton("選択 2");
-        choice2.setBackground(Color.black);
-        choice2.setForeground(Color.white);
+        choice2 = factory.createButton("選択 2");
         choice2.setFont(normalFont);
-        choice2.setFocusPainted(false);
         choice2.addActionListener(cHandler);
         choice2.setActionCommand("c2");
 
         // choice2をchoiceButtonPanelの上に配置
         choiceButtonPanel.add(choice2);
 
-        choice3 = new JButton("選択 3");
-        choice3.setBackground(Color.black);
-        choice3.setForeground(Color.white);
+        choice3 = factory.createButton("選択 3");
         choice3.setFont(normalFont);
-        choice3.setFocusPainted(false);
         choice3.addActionListener(cHandler);
         choice3.setActionCommand("c3");
 
         // choice3をchoiceButtonPanelの上に配置
         choiceButtonPanel.add(choice3);
 
-        choice4 = new JButton("選択 4");
-        choice4.setBackground(Color.black);
-        choice4.setForeground(Color.white);
+        choice4 = factory.createButton("選択 4");
         choice4.setFont(normalFont);
-        choice4.setFocusPainted(false);
         choice4.addActionListener(cHandler);
         choice4.setActionCommand("c4");
 
@@ -174,7 +146,7 @@ public class GameWindow implements Window {
 
     @Override
     public void createPlayerPanel() {
-        playerPanel = new JPanel();
+        playerPanel = factory.createPanel();
         playerPanel.setBounds(100, 15, 600, 50);
         playerPanel.setLayout(new GridLayout(1, 4));
         playerPanel.setBackground(Color.black);
@@ -221,6 +193,7 @@ public class GameWindow implements Window {
     @Override
     public void playerSetUp() {
         playerHp = 15;
+        playerExp = 10;
         playerLv = 1;
         weapon = "ナイフ";
         hpLabelNumber.setText("" + playerHp);
@@ -305,6 +278,7 @@ public class GameWindow implements Window {
     public void west() {
         position = "西";
         monsterHp = 20;
+        monsterExp = 10;
         mainTextArea.setText("ゴブリンに遭遇した");
         choice1.setText("たたかう");
         choice2.setText("逃げる");

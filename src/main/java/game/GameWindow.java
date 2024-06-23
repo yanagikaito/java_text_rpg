@@ -45,6 +45,7 @@ public class GameWindow implements Window {
     private ChoiceHandler cHandler = new ChoiceHandler(this);
     private EnumGameScreen enumGameStart = EnumGameScreen.getById(1);
     private EnumGameScreen enumGameBattle = EnumGameScreen.getById(2);
+    private EnumGameScreen enumGameGameOver = EnumGameScreen.getById(3);
 
     @Override
     public void frame() {
@@ -203,7 +204,7 @@ public class GameWindow implements Window {
         weaponName = "ナイフ";
         weaponKnife = 3;
         weaponLongSword = 5;
-        hpLabelNumber.setText("" + playerHp);
+        hpLabelNumber.setText("" + playerHp * playerLv);
         lvLabelNumber.setText("" + playerLv);
         weaponLabelName.setText(weaponName);
 
@@ -237,6 +238,9 @@ public class GameWindow implements Window {
         position = "門番に攻撃";
         mainTextArea.setText("門番：おい、バカなことを言うな。\n門番は反撃し、プレイヤーを攻撃した。\n(あなたは3ダメージを受けた。)");
         playerHp = playerHp - 3;
+        if (playerHp < 0) {
+            playerHp = 0;
+        }
         hpLabelNumber.setText("" + playerHp);
         choice1.setText(">");
         choice2.setText("");
@@ -257,7 +261,7 @@ public class GameWindow implements Window {
     @Override
     public void north() {
         Random random = new Random();
-        int recovery = random.nextInt(1) + 1;
+        int recovery = random.nextInt(5) + 1;
         position = "北";
         mainTextArea.setText("川がある。\n水を飲み、川辺で休んだ。\n\nプレイヤーのHPが" + recovery + " 回復した。");
         playerHp = playerHp + recovery;
@@ -274,9 +278,15 @@ public class GameWindow implements Window {
     @Override
     public void east() {
         position = "東";
-        mainTextArea.setText("森に入り、ロングソードを見つける。\n\nロングソードを手に入れた");
-        weaponName = "ロングソード";
-        weaponLabelName.setText(weaponName);
+        Random random = new Random();
+        int weaponDrop = random.nextInt(3) + 1;
+        if (weaponDrop == 3) {
+            mainTextArea.setText("森に入り、ロングソードを見つける。\n\nロングソードを手に入れた");
+            weaponName = "ロングソード";
+            weaponLabelName.setText(weaponName);
+        } else {
+            mainTextArea.setText("森に入り,何も見つからなかった");
+        }
         choice1.setText("西へ進む");
         choice2.setText("");
         choice3.setText("");
@@ -298,7 +308,7 @@ public class GameWindow implements Window {
     @Override
     public void fight() {
         position = "たたかう";
-        mainTextArea.setText("ゴブリン HP : " + monsterHp + "\n\n 何をする？");
+        mainTextArea.setText("ゴブリン HP : " + monsterHp * playerLv + "\n\n 何をする？");
         choice1.setText("攻撃");
         choice2.setText("逃げる");
         choice3.setText("");
@@ -315,7 +325,7 @@ public class GameWindow implements Window {
         } else if (weaponName.equals("ロングソード")) {
             playerDamage = random.nextInt(weaponLongSword * playerLv) + 1;
         }
-        mainTextArea.setText("モンスターを攻撃し、" + playerDamage + "ダメージを与えた。");
+        mainTextArea.setText("ゴブリンを攻撃し、" + playerDamage + "ダメージを与えた。");
         monsterHp = monsterHp - playerDamage;
         choice1.setText(enumGameBattle.getJButton());
         choice2.setText("");
@@ -360,7 +370,7 @@ public class GameWindow implements Window {
         playerHp = 1;
         hpLabelNumber.setText("" + playerHp);
         position = "負け";
-        mainTextArea.setText("プレイヤーはゴブリンに負けました。\n\nGAME OVER");
+        mainTextArea.setText("プレイヤーはゴブリンに負けました。" + enumGameGameOver.getJButton());
         choice1.setText(">");
         choice2.setText("");
         choice3.setText("");

@@ -3,13 +3,14 @@ package game;
 
 public enum EnumGameScreen {
     START("スタート", 1),
-    BATTLE(">", 2);
+    BATTLE(">", 2),
+    GAMEOVER("\n\nGAME OVER", 3);
 
-    private String button;
+    private String text;
     private int id;
 
-    EnumGameScreen(String button, int id) {
-        this.button = button;
+    EnumGameScreen(String text, int id) {
+        this.text = text;
         this.id = id;
     }
 
@@ -23,7 +24,7 @@ public enum EnumGameScreen {
     }
 
     public String getJButton() {
-        return button;
+        return text;
     }
 
     public int getId() {

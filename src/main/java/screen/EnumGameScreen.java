@@ -1,4 +1,4 @@
-package game;
+package screen;
 
 
 public enum EnumGameScreen {

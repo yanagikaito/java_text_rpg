@@ -72,7 +72,7 @@ public class ChoiceHandler implements ActionListener {
                     }
                 }
             }
-            case "ゴブリンの攻撃" -> {
+            case "ゴブリンの攻撃", "スライムの攻撃", "ドラゴンの攻撃", "オークの攻撃" -> {
                 switch (yourChoice) {
                     case "c1" -> {
                         if (gameWindow.getPlayerHp() < 1) {

@@ -2,9 +2,13 @@ package game;
 
 import handler.ChoiceHandler;
 import handler.TitleScreenHandler;
+import screen.EnumGameScreen;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class GameWindow implements Window {
@@ -46,6 +50,9 @@ public class GameWindow implements Window {
     private EnumGameScreen enumGameStart = EnumGameScreen.getById(1);
     private EnumGameScreen enumGameBattle = EnumGameScreen.getById(2);
     private EnumGameScreen enumGameGameOver = EnumGameScreen.getById(3);
+    private List<String> monsterName = List.of("ゴブリン", "スライム", "オーク", "ドラゴン");
+    private Random random = new Random();
+    private int monsterNum = random.nextInt(4);
 
     @Override
     public void frame() {
@@ -260,7 +267,6 @@ public class GameWindow implements Window {
 
     @Override
     public void north() {
-        Random random = new Random();
         int recovery = random.nextInt(5) + 1;
         position = "北";
         mainTextArea.setText("川がある。\n水を飲み、川辺で休んだ。\n\nプレイヤーのHPが" + recovery + " 回復した。");
@@ -278,7 +284,6 @@ public class GameWindow implements Window {
     @Override
     public void east() {
         position = "東";
-        Random random = new Random();
         int weaponDrop = random.nextInt(3) + 1;
         if (weaponDrop == 3) {
             mainTextArea.setText("森に入り、ロングソードを見つける。\n\nロングソードを手に入れた");
@@ -295,10 +300,12 @@ public class GameWindow implements Window {
 
     @Override
     public void west() {
+        random = new Random();
+        monsterNum = random.nextInt(4);
         position = "西";
         monsterHp = 20;
         monsterExp = 10;
-        mainTextArea.setText("ゴブリンに遭遇した");
+        mainTextArea.setText(monsterName.get(monsterNum) + "に遭遇した");
         choice1.setText("たたかう");
         choice2.setText("逃げる");
         choice3.setText("");
@@ -308,7 +315,7 @@ public class GameWindow implements Window {
     @Override
     public void fight() {
         position = "たたかう";
-        mainTextArea.setText("ゴブリン HP : " + monsterHp * playerLv + "\n\n 何をする？");
+        mainTextArea.setText(monsterName.get(monsterNum) + " HP : " + monsterHp * playerLv + "\n\n 何をする？");
         choice1.setText("攻撃");
         choice2.setText("逃げる");
         choice3.setText("");
@@ -317,7 +324,6 @@ public class GameWindow implements Window {
 
     @Override
     public void playerAttack() {
-        Random random = new Random();
         position = "プレイヤーの攻撃";
         int playerDamage = 0;
         if (weaponName.equals("ナイフ")) {
@@ -325,7 +331,7 @@ public class GameWindow implements Window {
         } else if (weaponName.equals("ロングソード")) {
             playerDamage = random.nextInt(weaponLongSword * playerLv) + 1;
         }
-        mainTextArea.setText("ゴブリンを攻撃し、" + playerDamage + "ダメージを与えた。");
+        mainTextArea.setText(monsterName.get(monsterNum) + "を攻撃し、" + playerDamage + "ダメージを与えた。");
         monsterHp = monsterHp - playerDamage;
         choice1.setText(enumGameBattle.getJButton());
         choice2.setText("");
@@ -335,12 +341,11 @@ public class GameWindow implements Window {
 
     @Override
     public void monsterAttack() {
-        Random random = new Random();
-        position = "ゴブリンの攻撃";
+        position = monsterName.get(monsterNum) + "の攻撃";
         goblinAttack = 3;
         int monsterDamage = 0;
         monsterDamage = random.nextInt(goblinAttack * playerLv) + 1;
-        mainTextArea.setText("ゴブリンはプレイヤーに" + monsterDamage + "ダメージ与えた");
+        mainTextArea.setText(monsterName.get(monsterNum) + "はプレイヤーに" + monsterDamage + "ダメージ与えた");
         playerHp = playerHp - monsterDamage;
         if (playerHp <= 0) {
             playerHp = 0;
@@ -355,7 +360,7 @@ public class GameWindow implements Window {
     @Override
     public void win() {
         position = "勝ち";
-        mainTextArea.setText("プレイヤーはゴブリンを倒しました" + monsterExp + "経験値を入手しました。");
+        mainTextArea.setText("プレイヤーは" + monsterName.get(monsterNum) + "を倒しました" + monsterExp + "経験値を入手しました。");
         playerExp = playerExp + monsterExp;
         playerLv = playerExp / monsterExp;
         lvLabelNumber.setText("" + playerLv);
@@ -370,7 +375,7 @@ public class GameWindow implements Window {
         playerHp = 1;
         hpLabelNumber.setText("" + playerHp);
         position = "負け";
-        mainTextArea.setText("プレイヤーはゴブリンに負けました。" + enumGameGameOver.getJButton());
+        mainTextArea.setText("プレイヤーは" + monsterName.get(monsterNum) + "に負けました。" + enumGameGameOver.getJButton());
         choice1.setText(">");
         choice2.setText("");
         choice3.setText("");

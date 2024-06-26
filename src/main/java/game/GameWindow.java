@@ -2,17 +2,18 @@ package game;
 
 import handler.ChoiceHandler;
 import handler.TitleScreenHandler;
+import screen.BattleScreenElementFactory;
 import screen.EnumGameScreen;
+import screen.ScreenElementFactory;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 public class GameWindow implements Window {
     private GameElementFactory factory = new ConcreteGameElementFactory();
+    private ScreenElementFactory battleScreenFactory = new BattleScreenElementFactory();
     private JFrame window;
     private Container con;
     private JPanel titleNamePanel;
@@ -169,35 +170,28 @@ public class GameWindow implements Window {
 
     @Override
     public void createHPLabel() {
-        hpLabel = new JLabel("HP:");
+        hpLabel = battleScreenFactory.createHPlabelText("HP:");
         hpLabel.setFont(normalFont);
-        hpLabel.setForeground(Color.white);
         playerPanel.add(hpLabel);
 
-        hpLabelNumber = new JLabel();
+        hpLabelNumber = battleScreenFactory.createHPlabelNumber();
         hpLabelNumber.setFont(normalFont);
-        hpLabelNumber.setForeground(Color.white);
         playerPanel.add(hpLabelNumber);
 
-        lvLabel = new JLabel("LV：");
+        lvLabel = battleScreenFactory.createLVlabelText("LV:");
         lvLabel.setFont(normalFont);
-        lvLabel.setForeground(Color.white);
         playerPanel.add(lvLabel);
 
-        lvLabelNumber = new JLabel();
+        lvLabelNumber = battleScreenFactory.createLVlabelNumber();
         lvLabelNumber.setFont(normalFont);
-        lvLabelNumber.setForeground(Color.white);
         playerPanel.add(lvLabelNumber);
 
-        weaponLabel = new JLabel("武器:");
+        weaponLabel = battleScreenFactory.createWEAPONlabelText("武器:");
         weaponLabel.setFont(normalFont);
-        weaponLabel.setForeground(Color.white);
         playerPanel.add(weaponLabel);
 
-        weaponLabelName = new JLabel();
+        weaponLabelName = battleScreenFactory.createWEAPONlabelName();
         weaponLabelName.setFont(normalFont);
-        weaponLabelName.setForeground(Color.white);
-        weaponLabelName.setForeground(Color.white);
         playerPanel.add(weaponLabelName);
 
         playerSetUp();

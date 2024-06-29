@@ -41,7 +41,7 @@ public class GameWindow implements Window {
     private int playerExp;
     private int monsterHp;
     private int monsterExp;
-    private int goblinAttack;
+    private int monsterAttack;
     private String weaponName;
     private int weaponKnife;
     private int weaponLongSword;
@@ -337,9 +337,9 @@ public class GameWindow implements Window {
     @Override
     public void monsterAttack() {
         position = monsterName.get(monsterNum) + "の攻撃";
-        goblinAttack = 3;
+        monsterAttack = 3;
         int monsterDamage = 0;
-        monsterDamage = random.nextInt(goblinAttack * playerLv) + 1;
+        monsterDamage = random.nextInt(monsterAttack * playerLv) + 1;
         mainTextArea.setText(monsterName.get(monsterNum) + "はプレイヤーに" + monsterDamage + "ダメージ与えた");
         playerHp = playerHp - monsterDamage;
         if (playerHp <= 0) {

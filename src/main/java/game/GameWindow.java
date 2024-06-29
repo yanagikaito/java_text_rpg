@@ -353,11 +353,14 @@ public class GameWindow implements Window {
 
     @Override
     public void win() {
-        position = "勝ち";
-        mainTextArea.setText("プレイヤーは" + monsterName.get(monsterNum) + "を倒しました" + monsterExp + "経験値を入手しました。");
         playerExp = playerExp + monsterExp;
         playerLv = playerExp / monsterExp;
+        position = "勝ち";
+        mainTextArea.setText("プレイヤーは" + monsterName.get(monsterNum) + "を倒しました" + monsterExp + "経験値を入手しました。\n" +
+                "プレイヤーのレベルが" + playerLv + "なりました。");
+        playerHp += playerLv;
         lvLabelNumber.setText("" + playerLv);
+        hpLabelNumber.setText("" + playerHp);
         choice1.setText("東");
         choice2.setText("");
         choice3.setText("");

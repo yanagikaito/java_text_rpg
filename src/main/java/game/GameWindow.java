@@ -354,12 +354,18 @@ public class GameWindow implements Window {
 
     @Override
     public void win() {
+        int randomDrop = random.nextInt(3) + 1;
         playerExp = playerExp + monsterExp;
         playerLv = playerExp / monsterExp;
         position = "勝ち";
         excalibur = 1;
-        mainTextArea.setText("プレイヤーは" + monsterName.get(monsterNum) + "を倒しました" + monsterExp + "経験値を入手しました。\n" +
-                "プレイヤーのレベルが" + playerLv + "なりました。\n" + monsterName.get(monsterNum) + "が伝説の剣を落とした。エクスカリバーを手に入れた");
+        if (randomDrop == 3) {
+            mainTextArea.setText("プレイヤーは" + monsterName.get(monsterNum) + "を倒しました" + monsterExp + "経験値を入手しました。\n" +
+                    "プレイヤーのレベルが" + playerLv + "なりました。\n" + monsterName.get(monsterNum) + "が伝説の剣を落とした。エクスカリバーを手に入れた");
+        } else {
+            mainTextArea.setText("プレイヤーは" + monsterName.get(monsterNum) + " を倒しました " + monsterExp + " 経験値を入手しました。" +
+                    "\nプレイヤーのレベルが" + playerLv + "なりました。");
+        }
         playerHp += playerLv;
         lvLabelNumber.setText("" + playerLv);
         hpLabelNumber.setText("" + playerHp);
@@ -384,7 +390,7 @@ public class GameWindow implements Window {
     @Override
     public void ending() {
         position = "終了";
-        mainTextArea.setText("衛兵 モンスターを倒してくれたのか ありがとう。\n私たちの町へようこそ \n\nゲームクリア");
+        mainTextArea.setText("門番 モンスターを倒してくれたのか ありがとう。\n私たちの町へようこそ \n\nゲームクリア");
         choice1.setText("");
         choice2.setText("");
         choice3.setText("");

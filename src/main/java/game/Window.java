@@ -35,4 +35,6 @@ public interface Window {
     void win();
 
     void lose();
+
+    void ending();
 }

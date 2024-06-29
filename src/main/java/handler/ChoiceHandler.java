@@ -23,7 +23,13 @@ public class ChoiceHandler implements ActionListener {
         switch (gameWindow.getPosition()) {
             case "町の門" -> {
                 switch (yourChoice) {
-                    case "c1" -> gameWindow.talkGuard();
+                    case "c1" -> {
+                        if (gameWindow.getExcalibur() == 1) {
+                            gameWindow.ending();
+                        } else {
+                            gameWindow.talkGuard();
+                        }
+                    }
                     case "c2" -> gameWindow.attackGuard();
                     case "c3" -> gameWindow.crossRoad();
                     case "c4" -> {

@@ -54,6 +54,7 @@ public class GameWindow implements Window {
     private List<String> monsterName = List.of("ゴブリン", "スライム", "オーク", "ドラゴン");
     private Random random = new Random();
     private int monsterNum = random.nextInt(4);
+    private int excalibur;
 
     @Override
     public void frame() {
@@ -356,8 +357,9 @@ public class GameWindow implements Window {
         playerExp = playerExp + monsterExp;
         playerLv = playerExp / monsterExp;
         position = "勝ち";
+        excalibur = 1;
         mainTextArea.setText("プレイヤーは" + monsterName.get(monsterNum) + "を倒しました" + monsterExp + "経験値を入手しました。\n" +
-                "プレイヤーのレベルが" + playerLv + "なりました。");
+                "プレイヤーのレベルが" + playerLv + "なりました。\n" + monsterName.get(monsterNum) + "が伝説の剣を落とした。エクスカリバーを手に入れた");
         playerHp += playerLv;
         lvLabelNumber.setText("" + playerLv);
         hpLabelNumber.setText("" + playerHp);
@@ -379,6 +381,15 @@ public class GameWindow implements Window {
         choice4.setText("");
     }
 
+    @Override
+    public void ending() {
+        position = "終了";
+        mainTextArea.setText("衛兵 モンスターを倒してくれたのか ありがとう。\n私たちの町へようこそ \n\nゲームクリア");
+        choice1.setText("");
+        choice2.setText("");
+        choice3.setText("");
+        choice4.setText("");
+    }
 
     public String getPosition() {
         return position;
@@ -390,5 +401,9 @@ public class GameWindow implements Window {
 
     public int getMonsterHp() {
         return monsterHp;
+    }
+
+    public int getExcalibur() {
+        return excalibur;
     }
 }

@@ -37,7 +37,7 @@ public class ConcreteGameElementFactory extends GameElementFactory {
     public JButton createButton(String text) {
         JButton button = new JButton();
         button.setBackground(Color.black);
-        button.setForeground(Color.white);
+        button.setForeground(Color.cyan);
         button.setFocusPainted(false);
         return button;
     }
